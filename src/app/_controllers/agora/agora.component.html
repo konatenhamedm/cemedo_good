@@ -1,0 +1,141 @@
+<section class="content">
+  <div class="content-block">
+    <div class="block-header">
+      <br>
+      <p-breadcrumb [model]="items" [home]="home"></p-breadcrumb>
+      <br>
+      
+    </div>
+    <div class="row clearfix">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="card">
+      
+          <div class="body">
+
+            <!-- Assurance -->
+
+            <p-toolbar styleClass="mb-4">
+             <!-- <ng-template pTemplate="left">
+                  <button pButton pRipple label="Nouveau" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
+                  &nbsp; <button pButton pRipple label="Supprimer" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedProducts()" [disabled]="!selectedEntity || !selectedEntity.length"></button>
+              </ng-template>-->
+      
+              <ng-template pTemplate="right">
+                  
+                <button pButton pRipple label="Imprimer" icon="pi pi-upload" class="p-button-help btn-view"></button>
+                </ng-template>
+          </p-toolbar>
+          <p-table #dt
+          [value]="liste"
+          [lazy]="true" 
+          (onLazyLoad)="loadCustomers($event)" dataKey="id" 
+          [selection]="selectedEntity" 
+          (selectionChange)="onSelectionChange($event)" 
+          [selectAll]="selectAll" 
+          styleClass="p-datatable-gridlines"
+          (selectAllChange)="onSelectAllChange($event)"
+          [paginator]="true"
+           [rows]="7" 
+           [totalRecords]="totalRecords"
+           [showCurrentPageReport]="true"
+            [loading]="loading" 
+            [rowsPerPageOptions]="[7,totalRecords*2,totalRecords*3]" 
+            currentPageReportTemplate="Affichage de {first} à {last} sur  {totalRecords} entrées"
+              >
+              
+              <ng-template pTemplate="header">
+                  <tr>
+                      <th style="width: 3rem">
+                          <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                      </th>
+                      <!--<th pResizableColumn pSortableColumn="id">id <p-sortIcon field="id"></p-sortIcon></th>-->
+                      <th pResizableColumn pSortableColumn="dateDebut">Date debut <p-sortIcon field="dateDebut"></p-sortIcon></th>
+                      
+                      <th pResizableColumn pSortableColumn="assure.user.fullName">Assure<p-sortIcon field="assure.user.fullName"></p-sortIcon></th>
+                  
+                      <th pResizableColumn>Actions</th>
+                  </tr>
+                  <tr>
+                      <th style="width: 3rem">
+                          <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                      </th>
+                     <!-- <th>
+                          <p-columnFilter type="text" field="id"></p-columnFilter>
+                      </th>-->
+                     
+                      <th>
+                          <p-columnFilter type="text" field="dateDebut"></p-columnFilter>
+                      </th>
+                     
+                    <th>
+                      <p-columnFilter type="text" field="assure.user.fullName"></p-columnFilter>
+                  </th>
+                      <th></th>
+                  </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-element>
+                  <tr [pSelectableRow]="element">
+                      <td>
+                          <p-tableCheckbox [value]="element"></p-tableCheckbox>
+                      </td>
+                      <!--<td>{{element.id}}</td>-->
+                      <td>{{element.dateDebut | date: "dd/mm/yyyy" }}</td>
+                      <td>{{element.assure.user.fullName}}</td>
+                      <td width="300px">
+                        <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success  btn-sm btn-edit" label="Assigner traitant" (click)="editProduct(element)" ></button> &nbsp;
+                        <button pButton pRipple icon="pi pi-check"  label="Participer" class="p-button p-button-help btn-sm btn-view" (click)="lancerCall()"  ></button>&nbsp;
+                      </td>
+                  </tr>
+              </ng-template>
+              <ng-template pTemplate="summary">
+                  <div class="flex align-items-center justify-content-between">
+                      Au total il y a  {{liste ? liste.length : 0 }} enregistrement(s).
+                  </div>
+              </ng-template>
+          </p-table>
+
+          
+          <p-dialog [(visible)]="entityDialog" [style]="{'width': '750px', 'margin-top': '-90px'}"  header="Agora" [modal]="true" styleClass="p-fluid el">
+            <ng-template pTemplate="content">
+              <br>
+              <div class="field">
+                <label for="employeTraitant">Assure</label>
+                <p-dropdown [options]="liste_employe" [(ngModel)]="specialite.employeTraitant" optionLabel="user.fullName" [filter]="true" filterBy="user.fullName"
+                [showClear]="true" placeholder="Selectionner un assure">
+                <ng-template pTemplate="specialite.assure">
+                  <div class="employeTraitant-id employeTraitant-id" *ngIf="specialite.employeTraitant">
+                    <div>{{specialite.employeTraitant.fullName</div>
+                  </div>
+                </ng-template>
+                <ng-template let-employeTraitant pTemplate="id">
+                  <div class="employeTraitant-id">
+                    <div>{{employeTraitant.user.fullName }}</div>
+                  </div>  
+                </ng-template>
+                </p-dropdown>
+             </div>
+            <br>
+            <br>
+            <br>
+            <hr>
+            </ng-template>
+      
+            <ng-template pTemplate="footer">
+                <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button p-button-help btn-delete" (click)="hideDialog()"></button>
+                <button pButton pRipple label="Assigner" icon="pi pi-check" class="p-button-success btn-view" (click)="saveProduct()" ></button>
+            </ng-template>
+        </p-dialog>
+            <!---->
+            <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+            <div [id]="localCallId" class="local"></div>
+  
+            <div *ngFor="let callId of remoteCalls" [id]="callId" class="remote"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+

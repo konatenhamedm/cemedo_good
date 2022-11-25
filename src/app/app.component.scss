@@ -1,0 +1,62 @@
+
+
+:host {
+    ::ng-deep .card {
+        background-color: white !important;
+      
+    }
+    ::ng-deep .btn-view {
+        background-color: rgb(10,112,172) !important;
+      
+    }
+    ::ng-deep .btn-delete {
+        background-color: red !important;
+      
+    }
+    ::ng-deep .hide-menu {
+        color: white !important;
+        font-weight: 500;
+        font-size: 15px;
+    }
+    ::ng-deep .content {
+        background-color: white !important;
+      
+    }
+    ::ng-deep .active {
+        background-color:rgb(20,46,68) !important;
+      
+    }
+    ::ng-deep .ml-menu {
+        background-color:rgb(20,46,68) !important;
+      color: white !important;
+    }
+
+    ::ng-deep .header  {
+       color:white !important;
+       font-weight: 500;
+        font-size: 15px;
+    }
+    ::ng-deep .icon-color {
+        color:white !important;
+       
+     }
+
+     ::ng-deep .sidebar .menu .list li.active .menu-top {
+        background-color: white !important;
+       
+      }
+      ::ng-deep .sidebar .menu .list li.active .menu-top .hide-menu {
+        
+        color: rgb(10,112,172)  !important;
+      }
+      ::ng-deep .p-datatable-thead{
+        
+        background-color: rgb(6,30,51) !important;
+      }
+      ::ng-deep .p-dialog-header{
+        
+        background-color: rgb(6,30,51) !important;
+      }
+      
+}
+

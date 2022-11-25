@@ -1,0 +1,118 @@
+<section class="content">
+  <div class="content-block">
+    <div class="block-header">
+      <br>
+      <p-breadcrumb [model]="items" [home]="home"></p-breadcrumb>
+      <br>
+      
+    </div>
+    <div class="row clearfix">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="card">
+      
+          <div class="body">
+
+            <!-- Assurance -->
+
+            <p-toolbar styleClass="mb-4">
+              <ng-template pTemplate="left">
+                  <button pButton pRipple label="Nouveau" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
+                  &nbsp; <button pButton pRipple label="Supprimer" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedProducts()" [disabled]="!selectedEntity || !selectedEntity.length"></button>
+              </ng-template>
+      
+              <ng-template pTemplate="right">
+                  
+          <button pButton pRipple label="Imprimer" icon="pi pi-upload" class="p-button-help btn-view"></button>
+          </ng-template>
+          </p-toolbar>
+          <p-table
+           [value]="liste"
+          [lazy]="true" 
+          (onLazyLoad)="loadCustomers($event)" dataKey="id" 
+          [selection]="selectedEntity" 
+          (selectionChange)="onSelectionChange($event)" 
+          [selectAll]="selectAll" 
+          styleClass="p-datatable-gridlines"
+          (selectAllChange)="onSelectAllChange($event)"
+          [paginator]="true"
+           [rows]="7" 
+           [totalRecords]="totalRecords"
+           [showCurrentPageReport]="true"
+            [loading]="loading" 
+            [rowsPerPageOptions]="[7,totalRecords*2,totalRecords*3]" 
+            currentPageReportTemplate="Affichage de {first} à {last} sur  {totalRecords} entrées"
+            >
+             
+              <ng-template pTemplate="header">
+                  <tr>
+                      <th style="width: 3rem">
+                          <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                      </th>
+                      <!--<th pResizableColumn pSortableColumn="id">id <p-sortIcon field="id"></p-sortIcon></th>-->
+                      <th pResizableColumn pSortableColumn="libelle">libelle <p-sortIcon field="libelle"></p-sortIcon></th>
+                  
+                      <th pResizableColumn>Actions</th>
+                  </tr>
+                  <tr>
+                      <th style="width: 3rem">
+                          <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                      </th>
+                     <!-- <th>
+                          <p-columnFilter type="text" field="id"></p-columnFilter>
+                      </th>-->
+                     
+                      <th>
+                          <p-columnFilter type="text" field="libelle"></p-columnFilter>
+                      </th>
+                      <th></th>
+                  </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-element>
+                  <tr [pSelectableRow]="element">
+                      <td>
+                          <p-tableCheckbox [value]="element"></p-tableCheckbox>
+                      </td>
+                      <!--<td>{{element.id}}</td>-->
+                      <td>{{element.libelle}}</td>
+                      <td width="200px">
+                        <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-success  btn-sm btn-edit" (click)="editProduct(element)" ></button> &nbsp;
+                        <button pButton pRipple icon="pi pi-check" class="p-button p-button-help btn-sm btn-view" (click)="deleteProduct(element)"  ></button>&nbsp;
+                        <button pButton pRipple icon="pi pi-trash" class="p-button p-button-warning btn-sm btn-delete" (click)="deleteProduct(element)"  ></button>
+                      </td>
+                  </tr>
+              </ng-template>
+              <ng-template pTemplate="summary">
+                  <div class="flex align-items-center justify-content-between">
+                      Au total il y a  {{liste ? liste.length : 0 }} enregistrement(s).
+                  </div>
+              </ng-template>
+          </p-table>
+            <!---->
+
+            <p-dialog [(visible)]="entityDialog" [style]="{'width': '750px', 'margin-top': '-90px'}"  header="Specialite Details" [modal]="true" styleClass="p-fluid el">
+              <ng-template pTemplate="content">
+              <br>
+                <div class="field">
+                  <label for="name">Libelle</label>
+                  <input type="text" pInputText id="name" [(ngModel)]="specialite.libelle" required autofocus />
+                  <small class="p-error" *ngIf="submitted && !specialite.libelle">Libelle est requis.</small>
+              </div>
+              
+      <hr>
+              </ng-template>
+        
+              <ng-template pTemplate="footer">
+                  <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button p-button-help btn-delete" (click)="hideDialog()"></button>
+                  <button pButton pRipple label="Valider" icon="pi pi-check" class="p-button-success btn-view" (click)="saveProduct()"></button>
+              </ng-template>
+          </p-dialog>
+            <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+

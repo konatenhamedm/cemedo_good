@@ -1,0 +1,33 @@
+export class RendezVous{
+    id:number
+    dateHeure:Date
+    commentaire:string
+    status:{
+        code:string
+        libelle:string
+    }
+    adresse:string
+    assure:{
+        id:number,
+        user:{
+            fullName:string
+            nom:string 
+          }
+    }
+    medecin:{
+        id:number,
+        user:{
+            fullName:string
+            nom:string 
+          }
+    }
+    gerant:{
+        id:number,
+        user:{
+            fullName:string
+            nom:string 
+          }
+    }
+    active:number
+  
+}

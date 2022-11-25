@@ -1,0 +1,30 @@
+:host {
+    ::ng-deep .el {
+        background-color: white !important;
+        width: 40vw !important;
+        box-shadow: 0px 20px 20px #D8DDE680;
+        border: 1px solid rgb(231, 231, 231);
+        //margin-top: -200px !important;
+    }
+  
+}
+ 
+
+:host {
+    ::ng-deep .p-dialog-header .ng-star-inserted {
+        color: white !important;
+      
+    }
+    
+  
+}
+:host {
+    ::ng-deep .rounded-circl {
+       //border-radius: 0.25rem;
+       max-width: 100%;
+       height: auto;
+      
+    }
+    
+  
+}

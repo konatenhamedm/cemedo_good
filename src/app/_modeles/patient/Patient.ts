@@ -1,0 +1,49 @@
+export class Patient {
+    active:number
+    dateNaissance:string
+    email:string
+    id:number
+    login:string
+    nom:string
+    password:string
+    prenoms:string
+    tauxCouverture:number
+    lieuHabitation:string
+    numeroAssure:string
+    profession:string
+      assurance:{
+        id:number,
+        libelle:string
+      }
+      genre:{
+        id:number,
+        libelle:string
+      }
+    tel:string
+    tel2:string
+  
+    user:{
+        nom:string
+        tauxCouverture:number
+        active:number
+        dateNaissance:string
+        email:string
+        assurance:string
+        genre:{
+          id:number
+          libelle:string
+        }
+        id:number
+        lieuHabitation:string
+        login:string
+        password:string
+        prenoms:string
+        role:{
+          id:number,
+          libelle:string
+        }
+        tel:string
+        tel2:string
+       
+    }
+}
